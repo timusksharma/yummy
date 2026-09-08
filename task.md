@@ -14,7 +14,7 @@ Status values: `TODO`, `IN PROGRESS`, `DONE`.
 | YUM-008 | Nutrition and kitchen tools | Dashboard, converters, timers and guides work | DONE |
 | YUM-009 | Responsive, accessibility and performance polish | Target breakpoints and accessibility checks pass | DONE |
 | YUM-010 | Validation, public GitHub repo and Vercel preview | Checks pass, source pushed, preview created | DONE |
-| YUM-011 | Record handoff | Preview URL and validation results recorded; production unchanged | IN PROGRESS |
+| YUM-011 | Record handoff | Preview URL and validation results recorded; production unchanged | DONE |
 
 ## Validation log
 
@@ -24,4 +24,6 @@ Status values: `TODO`, `IN PROGRESS`, `DONE`.
 - Production build: passed (`npm run build`).
 - Local route smoke check: `/` and `/recipes/mediterranean-bowl` returned HTTP 200.
 - Public source: https://github.com/timusksharma/yummy
+- Vercel preview: https://yummy-poudxlh0w-codnroid.vercel.app
+- Deployed smoke check: `/` and `/recipes/mediterranean-bowl` returned HTTP 200.
 - Existing F & K repository and deployment were not modified.
