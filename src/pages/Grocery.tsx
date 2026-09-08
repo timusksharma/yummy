@@ -1,0 +1,13 @@
+import { Minus, Plus, ShoppingBasket, Trash2 } from "lucide-react";
+import { useState } from "react";
+import type { GroceryCategory } from "../domain/models";
+import { recipes } from "../data/recipes";
+import { useKitchen } from "../hooks/useKitchenState";
+import { aggregateGroceries } from "../services/kitchen";
+const groups: GroceryCategory[]=["Vegetables","Fruits","Dairy","Meat & Protein","Grains","Spices","Frozen","Pantry"];
+export function GroceryPage(){
+ const {plan,groceries,setGroceries}=useKitchen(); const [name,setName]=useState("");
+ const add=()=>{if(!name.trim())return;setGroceries([...groceries,{id:`custom-${Date.now()}`,name:name.trim(),amount:1,unit:"pc",category:"Pantry",checked:false,custom:true}]);setName("")};
+ const update=(id:string,changes:Record<string,unknown>)=>setGroceries(groceries.map(g=>g.id===id?{...g,...changes}:g));
+ return <section className="section page"><div className="page-heading row"><div><span className="kicker">Everything in one place</span><h1>Smart grocery list</h1><p>Generate a combined list from your current meal plan.</p></div><button className="primary" onClick={()=>setGroceries(aggregateGroceries(plan,recipes))}><ShoppingBasket/>Generate from meal plan</button></div><div className="grocery-add input-row"><input value={name} onChange={e=>setName(e.target.value)} onKeyDown={e=>e.key==="Enter"&&add()} placeholder="Add an item…"/><button className="secondary" onClick={add}>Add item</button></div>{groceries.length?<><div className="grocery-progress"><b>{groceries.filter(g=>g.checked).length} of {groceries.length} collected</b><div><i style={{width:`${groceries.filter(g=>g.checked).length/groceries.length*100}%`}}/></div></div><div className="grocery-grid">{groups.map(group=>{const items=groceries.filter(g=>g.category===group);if(!items.length)return null;return <article key={group}><h2>{group}</h2>{items.map(item=><div className={item.checked?"grocery-item checked":"grocery-item"} key={item.id}><input type="checkbox" checked={item.checked} onChange={e=>update(item.id,{checked:e.target.checked})} aria-label={`Mark ${item.name} purchased`}/><span>{item.name}</span><div><button onClick={()=>update(item.id,{amount:Math.max(.25,item.amount-1)})}><Minus/></button><b>{item.amount} {item.unit}</b><button onClick={()=>update(item.id,{amount:item.amount+1})}><Plus/></button></div><button onClick={()=>setGroceries(groceries.filter(g=>g.id!==item.id))} aria-label={`Remove ${item.name}`}><Trash2/></button></div>)}</article>})}</div></>:<div className="empty"><span>🧺</span><h2>Your list is ready when you are</h2><p>Generate it from your meal plan or add an item above.</p></div>}</section>
+}

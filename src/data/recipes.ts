@@ -1,0 +1,23 @@
+import hero from "../assets/hero-food.jpg";
+import bowl from "../assets/smoothie-bowl.jpg";
+import meal from "../assets/meal-kit.jpg";
+import bites from "../assets/protein-balls.jpg";
+import type { Recipe } from "../domain/models";
+
+const steps = (dish: string) => [
+  { id: 1, instruction: "Wash, measure, and prepare all ingredients before you start." },
+  { id: 2, instruction: "Warm a wide pan over medium heat and add the aromatics.", timerMinutes: 3 },
+  { id: 3, instruction: `Add the main ingredients and cook until the ${dish.toLowerCase()} is tender.`, timerMinutes: 12 },
+  { id: 4, instruction: "Taste, season, and finish with fresh herbs before serving." },
+];
+
+export const recipes: Recipe[] = [
+  { id:"mediterranean-bowl", title:"Mediterranean Bowl", description:"Herby grains, crisp vegetables and creamy feta.", image:hero, imageAlt:"Colorful Mediterranean grain bowl", time:30, difficulty:"Easy", rating:4.9, servings:2, category:"Lunch", cuisine:"Mediterranean", diets:["Balanced","Vegetarian","High Protein"], featured:true, ingredients:[{name:"Rice",amount:1,unit:"cup",category:"Grains"},{name:"Tomato",amount:2,unit:"pcs",category:"Vegetables"},{name:"Spinach",amount:2,unit:"cups",category:"Vegetables"},{name:"Feta",amount:100,unit:"g",category:"Dairy"}], nutrition:{calories:510,protein:24,carbs:62,fat:18,fiber:11}, steps:steps("bowl") },
+  { id:"creamy-pasta", title:"Creamy Garden Pasta", description:"Silky pasta with spinach, tomato and parmesan.", image:meal, imageAlt:"Creamy vegetable pasta", time:25, difficulty:"Easy", rating:4.8, servings:4, category:"Dinner", cuisine:"Italian", diets:["Balanced","Vegetarian"], featured:true, ingredients:[{name:"Pasta",amount:400,unit:"g",category:"Grains"},{name:"Spinach",amount:3,unit:"cups",category:"Vegetables"},{name:"Tomato",amount:3,unit:"pcs",category:"Vegetables"},{name:"Parmesan",amount:80,unit:"g",category:"Dairy"}], nutrition:{calories:580,protein:22,carbs:78,fat:20,fiber:8}, steps:steps("pasta") },
+  { id:"protein-salad", title:"Rainbow Protein Salad", description:"Crunchy greens, eggs and a bright citrus dressing.", image:bowl, imageAlt:"Rainbow protein salad bowl", time:20, difficulty:"Easy", rating:4.7, servings:2, category:"Lunch", cuisine:"Mediterranean", diets:["High Protein","Low Carb","Gluten Free"], featured:true, ingredients:[{name:"Eggs",amount:4,unit:"pcs",category:"Meat & Protein"},{name:"Spinach",amount:4,unit:"cups",category:"Vegetables"},{name:"Tomato",amount:2,unit:"pcs",category:"Vegetables"},{name:"Lemon",amount:1,unit:"pc",category:"Fruits"}], nutrition:{calories:390,protein:31,carbs:22,fat:19,fiber:10}, steps:steps("salad") },
+  { id:"veggie-stir-fry", title:"Sesame Veggie Stir Fry", description:"Fast, glossy vegetables with ginger and sesame.", image:hero, imageAlt:"Vegetable stir fry with sesame", time:18, difficulty:"Easy", rating:4.6, servings:3, category:"Dinner", cuisine:"Asian", diets:["Vegan","Vegetarian","Low Carb"], ingredients:[{name:"Broccoli",amount:2,unit:"cups",category:"Vegetables"},{name:"Pepper",amount:2,unit:"pcs",category:"Vegetables"},{name:"Tofu",amount:300,unit:"g",category:"Meat & Protein"},{name:"Soy sauce",amount:3,unit:"tbsp",category:"Pantry"}], nutrition:{calories:340,protein:25,carbs:32,fat:15,fiber:9}, steps:steps("stir fry") },
+  { id:"butter-chicken", title:"Weeknight Butter Chicken", description:"A comforting tomato curry with a lighter finish.", image:meal, imageAlt:"Butter chicken with rice", time:45, difficulty:"Medium", rating:4.9, servings:4, category:"Dinner", cuisine:"Indian", diets:["High Protein","Gluten Free"], ingredients:[{name:"Chicken",amount:600,unit:"g",category:"Meat & Protein"},{name:"Tomato",amount:4,unit:"pcs",category:"Vegetables"},{name:"Yogurt",amount:1,unit:"cup",category:"Dairy"},{name:"Rice",amount:2,unit:"cups",category:"Grains"}], nutrition:{calories:640,protein:48,carbs:66,fat:20,fiber:6}, steps:steps("chicken") },
+  { id:"avocado-toast", title:"Avocado Sunrise Toast", description:"Creamy avocado, jammy eggs and chilli crunch.", image:bites, imageAlt:"Avocado and egg toast", time:12, difficulty:"Easy", rating:4.7, servings:1, category:"Breakfast", cuisine:"Modern", diets:["Balanced","Vegetarian","High Protein"], ingredients:[{name:"Bread",amount:2,unit:"slices",category:"Grains"},{name:"Avocado",amount:1,unit:"pc",category:"Fruits"},{name:"Eggs",amount:2,unit:"pcs",category:"Meat & Protein"}], nutrition:{calories:430,protein:21,carbs:38,fat:24,fiber:10}, steps:steps("toast") },
+];
+
+export const categories = ["Breakfast","Lunch","Dinner","Snacks","Desserts","Healthy","High Protein","Vegetarian","Vegan","Quick Meals","Indian","Italian","Asian","Mediterranean"];
