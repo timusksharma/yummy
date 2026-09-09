@@ -25,7 +25,7 @@ Status values: `TODO`, `IN PROGRESS`, `DONE`.
 | YUM-019 | Orders | Confirmation, tracking, history, reorder and reviews work | DONE |
 | YUM-020 | Yummy Kitchen migration | Existing kitchen routes live under `/kitchen` | DONE |
 | YUM-021 | Quality polish | Responsive, accessibility and storage checks pass | DONE |
-| YUM-022 | Validate and preview | Checks pass and Vercel preview is recorded | IN PROGRESS |
+| YUM-022 | Validate and preview | Checks pass and Vercel preview is recorded | DONE |
 
 ## Validation log
 
@@ -40,3 +40,5 @@ Status values: `TODO`, `IN PROGRESS`, `DONE`.
 - Existing F & K repository and deployment were not modified.
 - Delivery expansion checks: TypeScript, ESLint and production build passed; 8 automated tests passed.
 - Delivery route smoke test: home, discovery, restaurant, offers, cart, checkout, orders and Yummy Kitchen routes returned HTTP 200.
+- Automatic branch preview: https://yummy-git-feature-yummy-delivery-codnroid.vercel.app
+- Production remained on `main` and was not modified.
