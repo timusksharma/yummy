@@ -1,11 +1,59 @@
-import{ArrowRight,Clock3,MapPin,Search,Sparkles,Utensils}from"lucide-react";import{useState}from"react";import{Link,useNavigate}from"react-router-dom";import hero from"../assets/hero-food.jpg";import{DishCard}from"../components/DishCard";import{RestaurantCard}from"../components/RestaurantCard";import{cuisines,restaurants}from"../data/delivery";import{useDelivery}from"../hooks/useDeliveryState";
-export function HomePage(){const{location,setLocation}=useDelivery();const[query,setQuery]=useState("");const nav=useNavigate();const search=(e:React.FormEvent)=>{e.preventDefault();nav(`/restaurants?q=${encodeURIComponent(query)}`)};const dishes=restaurants.flatMap(r=>r.dishes.map(d=>({d,r})));return <>
-<section className="delivery-hero"><div className="delivery-hero-bg"><img src={hero} alt="" width="1400" height="700"/></div><div className="delivery-hero-content"><span className="kicker">Yummy Delivery</span><h1>Good food,<br/><em>right to your door.</em></h1><p>Discover trusted restaurants, comforting favorites and exciting new flavors near you.</p><div className="delivery-locator"><label><MapPin/><span><small>Delivering to</small><select value={location} onChange={e=>setLocation(e.target.value)}><option>Green Park, New Delhi</option><option>Hauz Khas, New Delhi</option><option>Cyber City, Gurugram</option><option>Indiranagar, Bengaluru</option></select></span></label><form onSubmit={search}><Search/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search restaurants, dishes or cuisines"/><button>Search</button></form></div><div className="hero-badges"><span><Clock3/>30 minute favorites</span><span><Sparkles/>Handpicked offers</span></div></div></section>
-<section className="section delivery-section"><div className="section-heading"><div><span className="kicker">What are you craving?</span><h2>Eat what makes you happy</h2></div></div><div className="cuisine-scroll">{cuisines.map((c,i)=><Link to={`/restaurants?q=${encodeURIComponent(c)}`} key={c}><span>{["🍕","🍲","🍔","🥡","🍛","🥞","🍰","🥗","🌯","🥟"][i]}</span><b>{c}</b></Link>)}</div></section>
-<section className="section delivery-section offers-home"><div className="section-heading"><div><span className="kicker">Big flavor, better value</span><h2>Offers for you</h2></div><Link to="/offers">View all <ArrowRight/></Link></div><div className="offer-grid"><Link to="/restaurants" className="offer-card red"><small>WELCOME OFFER</small><b>20% OFF</b><span>Use code YUMMY20</span></Link><Link to="/restaurants" className="offer-card green"><small>ZERO DELIVERY FEE</small><b>FREEDEL</b><span>On participating restaurants</span></Link><Link to="/restaurants/spice-route" className="offer-card yellow"><small>THE SPICE ROUTE</small><b>₹120 OFF</b><span>On your comfort-food fix</span></Link></div></section>
-<RestaurantSection title="Restaurants near you" kicker={location} list={restaurants}/><RestaurantSection title="Top rated restaurants" kicker="Loved by your neighborhood" list={[...restaurants].sort((a,b)=>b.rating-a.rating).slice(0,3)}/>
-<section className="section delivery-section"><div className="section-heading"><div><span className="kicker">Trending near you</span><h2>Popular dishes</h2></div><Link to="/restaurants">Explore all <ArrowRight/></Link></div><div className="dish-home-grid">{dishes.filter(x=>x.d.bestseller).map(({d,r})=><DishCard key={d.id} dish={d} restaurant={r}/>)}</div></section>
-<RestaurantSection title="Fast delivery" kicker="At your door in about 30 minutes" list={[...restaurants].sort((a,b)=>a.deliveryMinutes-b.deliveryMinutes).slice(0,3)}/>
-<section className="section kitchen-promo"><div><span className="kicker">Yummy Kitchen</span><h2>Sometimes, the best table is your own.</h2><p>Discover recipes, plan meals, build grocery lists and get practical cooking help.</p><Link className="primary" to="/kitchen/recipes"><Utensils/>Explore Yummy Kitchen</Link></div><div className="kitchen-stats"><span><b>6</b> kitchen-tested recipes</span><span><b>7</b> days planned in seconds</span><span><b>5</b> practical cooking tools</span></div></section>
-<section className="section app-promo"><div><span className="kicker">Yummy everywhere</span><h2>Your cravings,<br/>one tap away.</h2><p>Save favorites, track orders and plan your next meal from any screen.</p><div className="actions"><Link className="primary" to="/restaurants">Order now</Link><Link className="secondary" to="/orders">Track an order</Link></div></div><div className="phone-mock"><span>Yummy</span><img src={hero} alt="Yummy mobile food discovery preview" width="360" height="500"/><b>Hungry? We’ve got you.</b></div></section></>}
-function RestaurantSection({title,kicker,list}:{title:string;kicker:string;list:typeof restaurants}){return <section className="section delivery-section"><div className="section-heading"><div><span className="kicker">{kicker}</span><h2>{title}</h2></div><Link to="/restaurants">See all <ArrowRight/></Link></div><div className="restaurant-grid">{list.map(r=><RestaurantCard key={r.id} restaurant={r}/>)}</div></section>}
+import { ArrowRight, Check, Search, Star } from "lucide-react";
+import { useState, type FormEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import bowl from "../assets/smoothie-bowl.jpg";
+import meal from "../assets/meal-kit.jpg";
+import bites from "../assets/protein-balls.jpg";
+import heroPerson from "../assets/yummy-hero-person.png";
+import pizza from "../assets/yummy-pizza.png";
+import burger from "../assets/yummy-burger.png";
+import { DishCard } from "../components/DishCard";
+import { RestaurantCard } from "../components/RestaurantCard";
+import { cuisines, restaurants } from "../data/delivery";
+import { deliveryBenefits, serviceSteps } from "../data/homeContent";
+
+const categoryImages = [pizza, meal, burger, bowl, meal, bites, bowl, meal, burger, bites];
+
+export function HomePage() {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+  const popular = restaurants.flatMap((restaurant) => restaurant.dishes.map((dish) => ({ dish, restaurant }))).filter(({ dish }) => dish.bestseller);
+  const search = (event: FormEvent) => { event.preventDefault(); navigate(`/restaurants?q=${encodeURIComponent(query)}`); };
+
+  return (
+    <>
+      <section className="monkey-hero">
+        <div className="hero-message">
+          <span className="soft-orb"/>
+          <p className="hero-kicker">Hungry? We are one click away.</p>
+          <h1>Fastest <em>Delivery</em><br/>& easy <em>pickup.</em></h1>
+          <form className="green-search" onSubmit={search}><Search/><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Find restaurants, dishes, or cuisines"/><button>Find restaurants</button></form>
+          <Link className="how-link" to="/orders"><span><ArrowRight/></span>How ordering works</Link>
+        </div>
+        <div className="hero-art"><span className="hero-disc"/><i className="arc arc-green"/><i className="arc arc-red"/><i className="arc arc-grey"/><img src={heroPerson} alt="Smiling customer enjoying a burger" width="800" height="1000"/></div>
+        <div className="benefit-stack">{deliveryBenefits.map(({ icon: Icon, title, description }) => <article key={title}><span><Icon/></span><div><h3>{title}</h3><p>{description}</p></div></article>)}</div>
+      </section>
+
+      <section className="mobile-banner section"><div className="mini-phone"><span>Yummy<span>.</span></span><img src={burger} alt=""/><small>Let’s eat<br/>quality food</small></div><div><span className="tiny-label">YUMMY IN YOUR POCKET</span><h2>Download<br/>our mobile app</h2><div className="people-row">{["AK","NM","RS","JP"].map((person) => <span key={person}>{person}</span>)}<Link to="/restaurants"><ArrowRight/></Link></div></div><div className="store-ratings"><article><b>▶</b><span><strong>4.8/5</strong><small>★★★★★</small></span></article><article><b>●</b><span><strong>4.9/5</strong><small>★★★★★</small></span></article></div></section>
+
+      <section className="section reference-categories"><div className="reference-heading"><h2>Our <em>best delivered</em><br/>categories</h2><p>It is not just about bringing good food from restaurants. We deliver a better everyday experience.</p></div><div className="category-gallery">{cuisines.slice(0,6).map((category, index) => <Link to={`/restaurants?q=${encodeURIComponent(category)}`} key={category}><span className={`category-ring ring-${index % 3}`}><img src={categoryImages[index]} alt={category} loading="lazy"/></span><b>{category}</b><small>Order now <ArrowRight/></small></Link>)}</div></section>
+
+      <section className="speed-band"><div className="speed-copy"><span className="tiny-label">HOT, FRESH, AND FAST</span><h2>Fastest food<br/><em>delivery</em> in town</h2><p>Order from neighborhood favorites and follow every step to your door.</p><Link className="light-link" to="/restaurants">Explore food <ArrowRight/></Link></div><img src={pizza} alt="Fresh vegetable pizza ready for delivery" width="1200" height="800" loading="lazy"/><div className="speed-notes"><article><span>✦</span><div><b>Quick routes</b><small>Smart demo delivery estimates</small></div></article><article><span>✓</span><div><b>Carefully packed</b><small>Made fresh and sealed for travel</small></div></article></div></section>
+
+      <section className="section serve-section"><div className="reference-heading centered"><h2>How we <em>serve you</em></h2></div><div className="serve-grid">{serviceSteps.map(({ icon: Icon, title, description }, index) => <article key={title}><span className={`serve-icon serve-${index}`}><Icon/></span><h3>{title}</h3><p>{description}</p></article>)}</div></section>
+
+      <section className="section promo-collage"><Link to="/restaurants" className="promo-main"><div><span>YUMMY COMBO</span><h2>Buy 2<br/>get 1 free</h2><b>From ₹599</b></div><img src={burger} alt="Burger and fries promotional meal" loading="lazy"/></Link><div><Link to="/offers" className="promo-small cocoa"><span>Save 20%</span><h3>Sweet endings</h3><img src={bowl} alt="Dessert special" loading="lazy"/></Link><Link to="/offers" className="promo-small coral"><span>₹120 off</span><h3>Big flavor offers</h3><img src={meal} alt="Restaurant meal offer" loading="lazy"/></Link></div></section>
+
+      <RestaurantSection title="Restaurants near you" subtitle="Popular around Green Park" list={restaurants}/>
+      <section className="section popular-dishes"><div className="reference-heading"><h2>Popular <em>dishes</em></h2><Link to="/restaurants">See all <ArrowRight/></Link></div><div className="dish-home-grid">{popular.map(({ dish, restaurant }) => <DishCard key={dish.id} dish={dish} restaurant={restaurant}/>)}</div></section>
+
+      <section className="section kitchen-callout"><div><span className="tiny-label">YUMMY KITCHEN</span><h2>Prefer to cook?<br/><em>We have you.</em></h2><p>Discover recipes, plan seven delicious days, and keep your grocery list tidy.</p><Link className="green-button" to="/kitchen/recipes">Open Yummy Kitchen <ArrowRight/></Link></div><div className="kitchen-bubbles"><span><Check/>Smart recipes</span><span><Check/>Meal planning</span><span><Check/>Kitchen tools</span></div></section>
+
+      <section className="network-band"><div className="logo-cloud">{restaurants.map((restaurant) => <span key={restaurant.id}>{restaurant.name.slice(0,2)}</span>)}</div><div><span className="tiny-label">MORE CHOICE, MORE JOY</span><h2>Enjoy hundreds of dishes<br/>from neighborhood favorites</h2><Link to="/restaurants">Order now <ArrowRight/></Link></div></section>
+    </>
+  );
+}
+
+function RestaurantSection({ title, subtitle, list }: { title: string; subtitle: string; list: typeof restaurants }) {
+  return <section className="section restaurant-home"><div className="reference-heading"><div><span className="tiny-label">{subtitle}</span><h2>{title}</h2></div><Link to="/restaurants">See all <ArrowRight/></Link></div><div className="restaurant-grid">{list.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant}/>)}</div></section>;
+}

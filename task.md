@@ -26,6 +26,17 @@ Status values: `TODO`, `IN PROGRESS`, `DONE`.
 | YUM-020 | Yummy Kitchen migration | Existing kitchen routes live under `/kitchen` | DONE |
 | YUM-021 | Quality polish | Responsive, accessibility and storage checks pass | DONE |
 | YUM-022 | Validate and preview | Checks pass and Vercel preview is recorded | DONE |
+| YUM-023 | Reference design system and asset briefs | Tokens and responsive visual rules documented in code | DONE |
+| YUM-024 | Original Yummy imagery | Three generated assets are inspected and integrated | DONE |
+| YUM-025 | Navigation and footer | Shared shell matches the new visual direction | DONE |
+| YUM-026 | Hero and app promotion | New responsive opening modules render | DONE |
+| YUM-027 | Categories, delivery band and process | Reference-led modules render responsively | DONE |
+| YUM-028 | Offers, discovery, Kitchen and network modules | Homepage composition is complete | DONE |
+| YUM-029 | Restaurant and cart restyle | Delivery discovery and cart share the design system | DONE |
+| YUM-030 | Checkout, orders and account restyle | Transactional routes share the design system | DONE |
+| YUM-031 | Yummy Kitchen restyle | Kitchen routes share the design system | DONE |
+| YUM-032 | Refactor and quality polish | Obsolete styles removed; accessibility checks pass | DONE |
+| YUM-033 | Validate and preview | Checks pass and final branch preview is recorded | IN PROGRESS |
 
 ## Validation log
 
@@ -42,3 +53,5 @@ Status values: `TODO`, `IN PROGRESS`, `DONE`.
 - Delivery route smoke test: home, discovery, restaurant, offers, cart, checkout, orders and Yummy Kitchen routes returned HTTP 200.
 - Automatic branch preview: https://yummy-git-feature-yummy-delivery-codnroid.vercel.app
 - Production remained on `main` and was not modified.
+- Reference redesign checks: TypeScript, ESLint and production build passed; all 8 automated tests passed.
+- Redesigned route smoke test: homepage, delivery, restaurant, cart, checkout, orders and all Yummy Kitchen routes returned HTTP 200.
