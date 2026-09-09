@@ -36,7 +36,7 @@ Status values: `TODO`, `IN PROGRESS`, `DONE`.
 | YUM-030 | Checkout, orders and account restyle | Transactional routes share the design system | DONE |
 | YUM-031 | Yummy Kitchen restyle | Kitchen routes share the design system | DONE |
 | YUM-032 | Refactor and quality polish | Obsolete styles removed; accessibility checks pass | DONE |
-| YUM-033 | Validate and preview | Checks pass and final branch preview is recorded | IN PROGRESS |
+| YUM-033 | Validate and preview | Checks pass and final branch preview is recorded | DONE |
 
 ## Validation log
 
@@ -55,3 +55,5 @@ Status values: `TODO`, `IN PROGRESS`, `DONE`.
 - Production remained on `main` and was not modified.
 - Reference redesign checks: TypeScript, ESLint and production build passed; all 8 automated tests passed.
 - Redesigned route smoke test: homepage, delivery, restaurant, cart, checkout, orders and all Yummy Kitchen routes returned HTTP 200.
+- Reference-led branch preview: https://yummy-git-feature-yummy-delivery-codnroid.vercel.app
+- Original generated assets: `yummy-hero-person.png`, `yummy-pizza.png`, and `yummy-burger.png`.
