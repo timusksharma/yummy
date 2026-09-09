@@ -15,6 +15,17 @@ Status values: `TODO`, `IN PROGRESS`, `DONE`.
 | YUM-009 | Responsive, accessibility and performance polish | Target breakpoints and accessibility checks pass | DONE |
 | YUM-010 | Validation, public GitHub repo and Vercel preview | Checks pass, source pushed, preview created | DONE |
 | YUM-011 | Record handoff | Preview URL and validation results recorded; production unchanged | DONE |
+| YUM-012 | Delivery models, seed data, storage and routes | Typed delivery foundation compiles | DONE |
+| YUM-013 | Delivery navigation, location and search | Responsive delivery navigation works | DONE |
+| YUM-014 | Delivery-first homepage | Required discovery sections render | DONE |
+| YUM-015 | Restaurant discovery | Search, filters, sorting and favorites work | DONE |
+| YUM-016 | Restaurant menu and dishes | Menu sections, dish cards and quantities work | DONE |
+| YUM-017 | Customization and cart | Modal, single-restaurant rule and totals work | DONE |
+| YUM-018 | Checkout | Coupons, address, payment and review flow work | DONE |
+| YUM-019 | Orders | Confirmation, tracking, history, reorder and reviews work | DONE |
+| YUM-020 | Yummy Kitchen migration | Existing kitchen routes live under `/kitchen` | DONE |
+| YUM-021 | Quality polish | Responsive, accessibility and storage checks pass | DONE |
+| YUM-022 | Validate and preview | Checks pass and Vercel preview is recorded | IN PROGRESS |
 
 ## Validation log
 
@@ -27,3 +38,5 @@ Status values: `TODO`, `IN PROGRESS`, `DONE`.
 - Vercel preview: https://yummy-poudxlh0w-codnroid.vercel.app
 - Deployed smoke check: `/` and `/recipes/mediterranean-bowl` returned HTTP 200.
 - Existing F & K repository and deployment were not modified.
+- Delivery expansion checks: TypeScript, ESLint and production build passed; 8 automated tests passed.
+- Delivery route smoke test: home, discovery, restaurant, offers, cart, checkout, orders and Yummy Kitchen routes returned HTTP 200.

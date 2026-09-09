@@ -2,6 +2,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { recipes } from "../data/recipes";
 import { aggregateGroceries, convertMeasurement, convertTemperature, createMealPlan, rankRecipes } from "../services/kitchen";
 import { LocalStorageRepository } from "../services/storage";
+import { restaurants, coupons } from "../data/delivery";
+import { priceCart, searchRestaurants, statusFor } from "../services/delivery";
+import type { CartItem } from "../domain/delivery";
 
 describe("kitchen services", () => {
   it("ranks recipes by matching ingredients", () => {
@@ -21,6 +24,26 @@ describe("kitchen services", () => {
   it("converts common measures and temperatures", () => {
     expect(convertMeasurement(1, "cup", "ml")).toBe(240);
     expect(convertTemperature(180, "C")).toBe(356);
+  });
+});
+
+describe("delivery services", () => {
+  const cart: CartItem[] = [{ id:"one", dishId:"butter-chicken", restaurantId:"spice-route", quantity:2, choices:[] }];
+  it("searches names, cuisines and dishes", () => {
+    expect(searchRestaurants(restaurants,"momos")[0].id).toBe("wok-this-way");
+    expect(searchRestaurants(restaurants,"butter chicken")[0].id).toBe("spice-route");
+  });
+  it("calculates quantities, tax and coupon discounts", () => {
+    const total=priceCart(cart,restaurants,coupons[0]);
+    expect(total.subtotal).toBe(698);
+    expect(total.tax).toBe(35);
+    expect(total.discount).toBe(120);
+    expect(total.total).toBe(613);
+  });
+  it("progresses demo order status by elapsed time", () => {
+    const now=Date.now();
+    expect(statusFor(now,now)).toBe("Confirmed");
+    expect(statusFor(now,now+5*60000)).toBe("Delivered");
   });
 });
 
