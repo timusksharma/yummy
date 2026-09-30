@@ -36,7 +36,7 @@ export function Layout() {
           <label className="reference-location"><MapPin/><select value={location} onChange={(event) => setLocation(event.target.value)} aria-label="Delivery location"><option>Green Park, New Delhi</option><option>Hauz Khas, New Delhi</option><option>Cyber City, Gurugram</option><option>Indiranagar, Bengaluru</option></select></label>
           <form className="reference-search" onSubmit={search}><Search/><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search food" aria-label="Search food"/></form>
           <NavLink className="nav-icon" to="/favorites" aria-label="Favorites"><Heart/></NavLink>
-          <button className="nav-icon cart-button" onClick={() => setCartOpen(true)} aria-label={`${itemCount} items in cart`}><ShoppingBag/><b>{itemCount}</b></button>
+          <button className={`nav-icon cart-button ${itemCount>0?"has-items":""}`} onClick={() => setCartOpen(true)} aria-label={`${itemCount} items in cart`}><ShoppingBag/>{itemCount > 0 && <b key={itemCount}>{itemCount}</b>}</button>
           <NavLink className="profile-chip" to="/profile"><span>YS</span><b>My profile</b></NavLink>
           <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle menu">{menuOpen ? <X/> : <Menu/>}</button>
         </div>
