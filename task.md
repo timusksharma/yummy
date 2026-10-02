@@ -1,29 +1,31 @@
-# Yummy delivery tickets
+# Yummy Food Delivery Delivery Tickets
 
 Status values: `TODO`, `IN PROGRESS`, `DONE`.
 
 | Ticket | Work | Acceptance criteria | Status |
 |---|---|---|---|
-| YUM-001 | Scaffold, metadata, theme, router, Vercel config | App shell compiles with Yummy metadata and routes | DONE |
-| YUM-002 | Domain data, repositories, services, hooks | Typed data and resilient versioned local storage exist | DONE |
-| YUM-003 | Navigation, footer, home, recipe cards | Responsive home and shared navigation render | DONE |
-| YUM-004 | Recipe catalog, favorites, detail, cooking mode | Recipe discovery and cooking flow work | DONE |
-| YUM-005 | Ingredient matcher and Ask Yummy | Deterministic matching and local assistant work | DONE |
-| YUM-006 | Weekly meal planner | Filters, generation, replacement and persistence work | DONE |
-| YUM-007 | Smart grocery list | Meal-plan aggregation and item editing work | DONE |
-| YUM-008 | Nutrition and kitchen tools | Dashboard, converters, timers and guides work | DONE |
-| YUM-009 | Responsive, accessibility and performance polish | Target breakpoints and accessibility checks pass | DONE |
-| YUM-010 | Validation, public GitHub repo and Vercel preview | Checks pass, source pushed, preview created | DONE |
-| YUM-011 | Record handoff | Preview URL and validation results recorded; production unchanged | DONE |
+| DEL-001 | Food delivery domain models, mock dataset & storage | Comprehensive Indian food dataset with ₹ pricing, restaurants, menus, offers, addresses, and order history | DONE |
+| DEL-002 | Global state management (Cart, Location, Orders, Delivery) | React context with local storage persistence for cart items, selected location, active order, coupons, and favorites | DONE |
+| DEL-003 | App shell & Navigation (Desktop & Mobile) | Sticky topbar with delivery location selector, global search, live cart badge, and app-like mobile bottom nav | DONE |
+| DEL-004 | Homepage & Food Discovery Experience | Food delivery hero, "What's on your mind?" circular categories, promotional offer carousel, and curated restaurant feeds | DONE |
+| DEL-005 | Restaurant Listing, Search & Filter Engine | Multi-criteria filters (Pure Veg, 4.0+ rating, <30 mins, Cuisines), sorting options, and unified dish/restaurant search | DONE |
+| DEL-006 | Restaurant Detail & Interactive Menu | Restaurant banner, category jump tabs, Veg/Non-Veg indicators, Bestseller badges, and dish cards with ADD action | DONE |
+| DEL-007 | Dish Customization & Cart Management | Modal for sizes, crusts, toppings, special notes, ADD into `− 1 +` counter, and floating mobile cart bar | DONE |
+| DEL-008 | Full Cart Page & Coupon Engine | Itemized cart, restaurant-switch protection, coupon codes (`YUMMY50`, `FREEDEL`, `SAVE125`), and detailed ₹ bill breakdown | DONE |
+| DEL-009 | Checkout, Address Selection & Payment | Delivery address selection (Home/Work/New address modal), payment methods (UPI, GPay, Cards, COD), and Place Order flow | DONE |
+| DEL-010 | Live Order Tracking & Delivery Simulation | Animated order progress (Confirmed → Preparing → Out for Delivery → Delivered), simulated delivery map, and rider details | DONE |
+| DEL-011 | Orders History, 1-Click Reorder & Review | Active & past orders list, 1-click reorder rebuilding the cart, and 5-star order rating modal | DONE |
+| DEL-012 | Favorites, User Profile & Notification Center | Saved restaurants and dishes, address manager, notification drawer, and demo account settings | DONE |
+| DEL-013 | Quality Assurance, Unit Tests, Typecheck & Build | Updated Vitest unit tests for delivery cart/pricing/coupons, strict TypeScript passing, ESLint clean, and production build passing | DONE |
 
-## Validation log
+## Delivery Strategy & Flow
+```text
+Choose Location → Discover Food & Offers → Find Restaurant → Explore Menu & Customize → Add to Cart → Apply Coupon → Select Address & Payment → Place Order → Live Tracking Simulation → Rate & Review
+```
 
-- TypeScript: passed (`npm run typecheck`).
-- ESLint: passed with no warnings (`npm run lint`).
-- Automated tests: 5 passed (`npm test`).
-- Production build: passed (`npm run build`).
-- Local route smoke check: `/` and `/recipes/mediterranean-bowl` returned HTTP 200.
-- Public source: https://github.com/timusksharma/yummy
-- Vercel preview: https://yummy-poudxlh0w-codnroid.vercel.app
-- Deployed smoke check: `/` and `/recipes/mediterranean-bowl` returned HTTP 200.
-- Existing F & K repository and deployment were not modified.
+## Validation Log
+- TypeScript: passed (`npm run typecheck` with 0 errors).
+- ESLint: passed (`npm run lint` with 0 warnings).
+- Automated tests: 9 passed (`npm test`).
+- Production build: passed (`npm run build` in 1.10s).
+- Local dev server: running at `http://localhost:8080/`.
